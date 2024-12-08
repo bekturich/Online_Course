@@ -1,6 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
+class Category(models.Model):
+    category_name = models.CharField(max_length=25, unique=True)
+
+    def __str__(self):
+        return self.category_name
+
+
 class UserProfile(AbstractUser):
     ROLE_CHOICES = (
         ('преподаватель', 'преподаватель'),
@@ -14,15 +22,16 @@ class UserProfile(AbstractUser):
     def __str__(self):
         return self.username
 
+
 class Course(models.Model):
     LEVEL_CHOICES = (
         ('начальный', 'начальный'),
         ('средний', 'средний'),
         ('продвинутый', 'продвинутый'),
     )
-    course_name = models.CharField(max_length=32)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    course_name = models.CharField(max_length=100)
     description = models.TextField()
-    category = models.CharField(max_length=32)
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     created_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
@@ -32,14 +41,40 @@ class Course(models.Model):
     def __str__(self):
         return self.course_name
 
+    def get_avg_rating(self):
+        ratings = self.reviews.all()
+        if ratings.exists():
+            return round(sum(i.rating for i in ratings) / ratings.count(), 1)
+        return 0
+
+    def get_count_people(self):
+        total = self.reviews.all()
+        if total.exists():
+            if total.count() > 2:
+                return '2+'
+            return total.count()
+        return 0
+
+    def get_count_good_grade(self):
+        total = self.reviews.all()
+        if total.exists():
+            num = 0
+            for i in total:
+                if i.rating > 3:
+                    num += 1
+            return f'{round((num * 100) / total.count())}%'
+        return 0
+
+
 class Lesson(models.Model):           #модели Уроков
-    title = models.CharField(max_length=32)
+    title = models.CharField(max_length=100)
     video_url = models.URLField()
     content = models.TextField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
 
     def __str__(self):
         return self.title
+
 
 class Assignment(models.Model):      #модели Заданий
     title = models.CharField(max_length=32)
@@ -51,6 +86,7 @@ class Assignment(models.Model):      #модели Заданий
     def __str__(self):
         return self.title
 
+
 class Exam(models.Model):               #модели экзаменов
     title = models.CharField(max_length=52)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='exams')
@@ -59,6 +95,7 @@ class Exam(models.Model):               #модели экзаменов
 
     def __str__(self):
         return self.title
+
 
 class Certificate(models.Model):       #модели сертификатов
     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
@@ -69,6 +106,7 @@ class Certificate(models.Model):       #модели сертификатов
     def __str__(self):
         return f"{self.student} - {self.course}"
 
+
 class Review(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='reviews')
@@ -78,6 +116,7 @@ class Review(models.Model):
     def __str__(self):
         return f"Отзыв от {self.user} для {self.course}"
 
+
 class Subscription(models.Model):             #модели подписки
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='subscriptions')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='subscribers')
@@ -85,6 +124,7 @@ class Subscription(models.Model):             #модели подписки
 
     def __str__(self):
         return f"{self.user} подписался на {self.course}"
+
 
 class Payment(models.Model):               #модели оплаты
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
@@ -99,6 +139,7 @@ class Payment(models.Model):               #модели оплаты
 
     def __str__(self):
         return f"Оплата по {self.user} для {self.course}"
+
 
 class Webinar(models.Model):            #модели вебинары
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='webinars')
