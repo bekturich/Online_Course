@@ -5,6 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59b15865-f704-40b3-97b9-9e3f16a38479" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/migrations/0002_category.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/migrations/0003_category_category_name_en_category_category_name_ru_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/migrations/0004_remove_category_category_name_en_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/migrations/0005_category_category_name_en_category_category_name_ru_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/migrations/0006_remove_course_course_name_en_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/course/translation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/req.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/courses.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/courses.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -14,7 +24,7 @@
       <change beforePath="$PROJECT_DIR$/mysite/course/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/course/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/course/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/course/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/course/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/course/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/mysite/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/mysite/urls.py" afterDir="false" />
     </list>
